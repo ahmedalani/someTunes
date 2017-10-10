@@ -15,20 +15,20 @@ ActiveRecord::Schema.define do
   drop_table :tracks, if_exists: true
 
   create_table :artists do |table|
-    table.column :name, :string, null: false
-    table.column :planet, :string, null: false
+    table.column :name, :string
+    table.column :planet, :string
     table.timestamps null: false
   end
 
   create_table :albums do |table|
-    table.column :title, :string, null: false
+    table.column :title, :string
     table.references :artist, index: true, foreign: true
     table.timestamps null: false
   end
 
   create_table :tracks do |table|
-    table.column :track_number, :integer, null: false
-    table.column :title, :string, null: false
+    table.column :track_number, :integer
+    table.column :title, :string
     table.references :album, index: true, foreign: true
     table.timestamps null: false
   end
@@ -70,3 +70,17 @@ Album.all.each do |album|
     )
   end
 end
+
+# TODO
+# 1) what is wrong with the output of this:
+# Album.first.tracks.each do |t|
+#   p t
+# end
+
+# 2) This shouldn't work, no planet specified!
+# bad_artist = Artist.create!(name: 'bob')
+# p bad_artist
+
+# 3) Add another entity 'genre'
+# it should be a parent of artist
+
